@@ -1,12 +1,26 @@
 import os
+import traceback
+import logging
+import torch
+import asyncio
+
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import Chroma
+from langchain_community.llms import HuggingFacePipeline
+from transformers import pipeline, AutoTokenizer
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
 from typing import List, Optional
+from langchain_community.llms import Ollama
+# from langchain_community.embeddings import SentenceTransformerEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
+
+# Set up logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 
@@ -25,13 +39,78 @@ class QueryResponse(BaseModel):
 class HTMLRAGSystem:
     def __init__(self, persist_directory="./chroma_db"):
         self.persist_directory = persist_directory
-        self.embeddings = OpenAIEmbeddings(
-            model=os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
+        # self.embeddings = OpenAIEmbeddings(
+        #     model=os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
+        # )
+        self.embeddings = HuggingFaceEmbeddings(model_name='all-MiniLM-L6-v2')
+
+        # "model" => "gpt-4o-mini",
+        # self.llm = ChatOpenAI(
+        #     # model=os.getenv("LLM_MODEL", "gpt-3.5-turbo"),
+        #     model=os.getenv("LLM_MODEL", "gpt-4o-mini"),
+        #     temperature=0.1
+        # )
+
+        # Get model from environment or use default
+        # model_name = os.getenv("LLM_MODEL", "microsoft/DialoGPT-medium")
+        # model_name = 'gpt2';        
+        
+        # Fixed configuration
+        # model_name = os.getenv("LLM_MODEL", "distilgpt2")
+ 
+        self.llm = Ollama(
+            model="tinyllama",  # Fast and reliable model
+            temperature=0.1,
+            num_ctx=2048,      # Context window
+            num_predict=256    # Max tokens to generate
         )
-        self.llm = ChatOpenAI(
-            model=os.getenv("LLM_MODEL", "gpt-3.5-turbo"),
-            temperature=0.1
-        )
+        # Initialize with explicit tokenizer
+        # tokenizer = AutoTokenizer.from_pretrained(model_name)
+        # if tokenizer.pad_token is None:
+        #     tokenizer.pad_token = tokenizer.eos_token
+            
+        # pipe = pipeline(
+        #     "text-generation",
+        #     model=model_name,
+        #     tokenizer=tokenizer,
+        #     max_new_tokens=150,        # Use max_new_tokens instead of max_length
+        #     temperature=0.1,
+        #     do_sample=True,
+        #     pad_token_id=50256,
+        #     device=0 if torch.cuda.is_available() else -1,
+        #     return_full_text=False     # Only return the generated part
+        # )
+
+        # self.llm = HuggingFacePipeline(
+        #     pipeline=pipe,
+        #     model_kwargs={
+        #         "max_new_tokens": 150,    # New tokens to generate
+        #         "temperature": 0.1,
+        #         "do_sample": True,
+        #         "return_full_text": False
+        #     }
+        # )
+
+        # # Create the pipeline
+        # pipe = pipeline(
+        #     "text-generation",
+        #     model=model_name,
+        #     max_length=512,
+        #     temperature=0.1,  # Same temperature as your OpenAI config
+        #     do_sample=True,
+        #     pad_token_id=50256,  # Helps avoid warnings
+        #     device=0 if torch.cuda.is_available() else -1
+        # )
+        
+        # self.llm = HuggingFacePipeline(
+        #     pipeline=pipe,
+        #     model_kwargs={
+        #         "temperature": 0.1,
+        #         "max_length": 512,
+        #         "do_sample": True,
+        #     }
+        # )
+    
         self.vectorstore = None
         self.qa_chain = None
         self.html_generation_chain = None
@@ -113,7 +192,7 @@ Only return the HTML code, no explanations:""",
         
         try:
             # Get answer with sources
-            result = self.qa_chain({"query": question})
+            result = self.qa_chain.invoke({"query": question})
             answer = result["result"]
             
             sources = []
@@ -173,32 +252,85 @@ async def root():
 
 @app.post("/query", response_model=QueryResponse)
 async def query_templates(request: QueryRequest):
-    """Query HTML templates and get answers"""
-    result = rag_system.query(
-        request.query, 
-        request.max_results, 
-        request.include_sources
-    )
-    
-    return QueryResponse(
-        answer=result["answer"],
-        sources=result["sources"]
-    )
+
+    try:
+        logger.info(f"Received query: {request.query}")
+        
+        logger.info("About to invoke rag_system")
+                
+        """Query HTML templates and get answers"""
+        
+        # Server-side timeout handling
+        result = await asyncio.wait_for(
+            asyncio.to_thread(rag_system.query, request.query, request.max_results, request.include_sources),
+            timeout=480000  # 20 minutes
+        )
+        
+        # result = rag_system.query(
+        #     request.query, 
+        #     request.max_results, 
+        #     request.include_sources
+        # )
+        logger.info(f"Query HTML templates result: {result}")
+        
+        return QueryResponse(
+            answer=result["answer"],
+            sources=result["sources"]
+        )
+        
+    except Exception as e:
+        error_msg = f"Error in query endpoint: {str(e)}"
+        logger.error(error_msg)
+        logger.error(f"Full traceback: {traceback.format_exc()}")
+        
+        # Print to console as well
+        print(f"ERROR: {error_msg}")
+        print(f"TRACEBACK: {traceback.format_exc()}")
+        
+        raise HTTPException(status_code=500, detail=error_msg)
+        
 
 @app.post("/generate", response_model=QueryResponse)
 async def generate_html(request: QueryRequest):
     """Generate HTML code based on query"""
-    # First get context from templates
-    result = rag_system.query(request.query, request.max_results, True)
-    
-    # Then generate HTML
-    html_code = rag_system.generate_html(request.query)
-    
-    return QueryResponse(
-        answer=result["answer"],
-        sources=result["sources"] if request.include_sources else None,
-        generated_html=html_code
-    )
+      
+    try:
+        logger.info(f"Received query: {request.query}")
+        
+        logger.info("About to invoke rag_system")
+                
+        """Query HTML templates and get answers"""
+        # First get context from templates
+        # result = rag_system.query(request.query, request.max_results, True)
+        
+        # Server-side timeout handling
+        result = await asyncio.wait_for(
+            asyncio.to_thread(rag_system.query, request.query, request.max_results, True),
+            timeout=480000  # 20 minutes
+        )
+
+        # Then generate HTML
+        html_code = rag_system.generate_html(request.query)
+        
+        return QueryResponse(
+            answer=result["answer"],
+            sources=result["sources"] if request.include_sources else None,
+            generated_html=html_code
+        )
+        
+    except Exception as e:
+        error_msg = f"Error in query endpoint: {str(e)}"
+        logger.error(error_msg)
+        logger.error(f"Full traceback: {traceback.format_exc()}")
+        
+        # Print to console as well
+        print(f"ERROR: {error_msg}")
+        print(f"TRACEBACK: {traceback.format_exc()}")
+        
+        raise HTTPException(status_code=500, detail=error_msg)
+        
+
+   
 
 @app.get("/health")
 async def health_check():
@@ -226,4 +358,4 @@ async def health_check():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000, timeout_keep_alive=120)
