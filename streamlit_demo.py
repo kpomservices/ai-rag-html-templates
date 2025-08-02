@@ -34,7 +34,7 @@ def query_api(endpoint, query, max_results=3, include_sources=True):
         response = requests.post(
             f"{API_BASE_URL}/{endpoint}",
             json=payload,
-            timeout=30
+            timeout=3600  # Increased timeout to 2 minutes
         )
         response.raise_for_status()
         return True, response.json()
@@ -115,7 +115,14 @@ with tab1:
                                 st.markdown("**Preview:**")
                                 st.code(source["content_preview"], language="html")
                 else:
-                    st.error(f"Error: {result.get('error', 'Unknown error')}")
+                    error_msg = result.get('error', 'Unknown error')
+                    st.error(f"Error: {error_msg}")
+                    
+                    # Provide helpful error messages
+                    if "timeout" in error_msg.lower():
+                        st.info("💡 **Timeout Tips:**\n- Try a shorter query\n- Check if Ollama is running\n- Restart the API server")
+                    elif "ollama" in error_msg.lower():
+                        st.info("💡 **Ollama Issue:**\n- Install Ollama from https://ollama.ai\n- Run `ollama pull tinyllama`\n- Make sure Ollama service is running")
 
 with tab2:
     st.header("Generate HTML Code")

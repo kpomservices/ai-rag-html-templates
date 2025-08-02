@@ -58,12 +58,52 @@ class HTMLRAGSystem:
         # Fixed configuration
         # model_name = os.getenv("LLM_MODEL", "distilgpt2")
  
-        self.llm = Ollama(
-            model="tinyllama",  # Fast and reliable model
-            temperature=0.1,
-            num_ctx=2048,      # Context window
-            num_predict=256    # Max tokens to generate
-        )
+        # Try Ollama first, fallback to HuggingFace if not available
+        try:
+            self.llm = Ollama(
+                model="tinyllama",  # Fast and reliable model
+                temperature=0.1,
+                num_ctx=4096,      # Increased context window
+                num_predict=2048,  # Increased max tokens to generate for longer responses
+                stop=["</s>", "Human:", "Assistant:"]  # Stop tokens to prevent incomplete responses
+            )
+            print("✅ Using Ollama with tinyllama model")
+        except Exception as e:
+            print(f"⚠️ Ollama not available: {e}")
+            print("🔄 Falling back to HuggingFace model...")
+            
+            # Fallback to HuggingFace model
+            model_name = "distilgpt2"
+            tokenizer = AutoTokenizer.from_pretrained(model_name)
+            if tokenizer.pad_token is None:
+                tokenizer.pad_token = tokenizer.eos_token
+                
+            pipe = pipeline(
+                "text-generation",
+                model=model_name,
+                tokenizer=tokenizer,
+                max_new_tokens=1024,  # Increased from 150 to 1024 for longer responses
+                temperature=0.1,
+                do_sample=True,
+                pad_token_id=50256,
+                device=0 if torch.cuda.is_available() else -1,
+                return_full_text=False,
+                eos_token_id=tokenizer.eos_token_id,  # Explicit end-of-sequence token
+                repetition_penalty=1.1  # Prevent repetitive output
+            )
+
+            self.llm = HuggingFacePipeline(
+                pipeline=pipe,
+                pipeline_kwargs={
+                    "max_new_tokens": 1024,  # Increased from 150 to 1024 for longer responses
+                    "temperature": 0.1,
+                    "do_sample": True,
+                    "return_full_text": False,
+                    "eos_token_id": tokenizer.eos_token_id,  # Explicit end-of-sequence token
+                    "repetition_penalty": 1.1  # Prevent repetitive output
+                }
+            )
+            print("✅ Using HuggingFace distilgpt2 model")
         # Initialize with explicit tokenizer
         # tokenizer = AutoTokenizer.from_pretrained(model_name)
         # if tokenizer.pad_token is None:
@@ -144,7 +184,7 @@ Context from HTML templates:
 
 Question: {question}
 
-Provide a helpful answer about the HTML templates. If the question asks for HTML code, provide clean, well-formatted HTML. Include relevant CSS classes, IDs, and structure information from the templates.
+Provide a comprehensive and detailed answer about the HTML templates. If the question asks for HTML code, provide complete, clean, well-formatted HTML with all necessary elements. Include relevant CSS classes, IDs, and structure information from the templates. Be thorough and provide complete solutions.
 
 Answer:""",
             input_variables=["context", "question"]
@@ -154,27 +194,33 @@ Answer:""",
             llm=self.llm,
             chain_type="stuff",
             retriever=self.vectorstore.as_retriever(search_kwargs={"k": 3}),
-            chain_type_kwargs={"prompt": qa_prompt},
+            chain_type_kwargs={
+                "prompt": qa_prompt,
+                "document_separator": "\n\n",  # Better document separation
+                "document_variable_name": "context"  # Explicit variable name
+            },
             return_source_documents=True
         )
         
         # Create HTML generation chain
         html_prompt = PromptTemplate(
-            template="""You are an expert HTML developer. Based on the following HTML template examples and user request, generate clean, modern HTML code.
+            template="""You are an expert HTML developer. Based on the following HTML template examples and user request, generate complete, clean, modern HTML code.
 
 Template examples for reference:
 {context}
 
 User request: {question}
 
-Generate complete, valid HTML code that addresses the user's request. Include:
-1. Proper HTML5 structure
-2. Relevant CSS styling (inline or in <style> tags)
-3. Semantic HTML elements
-4. Responsive design considerations
-5. Clean, readable code structure
+Generate comprehensive, valid HTML code that fully addresses the user's request. Include:
+1. Complete HTML5 structure with proper DOCTYPE and meta tags
+2. Comprehensive CSS styling (inline or in <style> tags)
+3. Semantic HTML elements for accessibility
+4. Responsive design considerations with media queries
+5. Clean, readable code structure with proper indentation
+6. All necessary JavaScript if required
+7. Complete implementation of the requested functionality
 
-Only return the HTML code, no explanations:""",
+Provide the complete HTML code without any explanations or additional text:""",
             input_variables=["context", "question"]
         )
         
@@ -182,7 +228,11 @@ Only return the HTML code, no explanations:""",
             llm=self.llm,
             chain_type="stuff",
             retriever=self.vectorstore.as_retriever(search_kwargs={"k": 5}),
-            chain_type_kwargs={"prompt": html_prompt}
+            chain_type_kwargs={
+                "prompt": html_prompt,
+                "document_separator": "\n\n",  # Better document separation
+                "document_variable_name": "context"  # Explicit variable name
+            }
         )
     
     def query(self, question: str, max_results: int = 3, include_sources: bool = True):
@@ -194,6 +244,10 @@ Only return the HTML code, no explanations:""",
             # Get answer with sources
             result = self.qa_chain.invoke({"query": question})
             answer = result["result"]
+            
+            # Log the answer length for debugging
+            logger.info(f"Generated answer length: {len(answer)} characters")
+            logger.info(f"Answer preview: {answer[:200]}...")
             
             sources = []
             if include_sources and "source_documents" in result:
@@ -222,6 +276,10 @@ Only return the HTML code, no explanations:""",
             result = self.html_generation_chain({"query": request})
             html_code = result["result"]
             
+            # Log the HTML code length for debugging
+            logger.info(f"Generated HTML length: {len(html_code)} characters")
+            logger.info(f"HTML preview: {html_code[:200]}...")
+            
             # Clean up the HTML code (remove any explanatory text)
             lines = html_code.split('\n')
             html_lines = []
@@ -236,8 +294,11 @@ Only return the HTML code, no explanations:""",
                     break
             
             if html_lines:
-                return '\n'.join(html_lines)
+                final_html = '\n'.join(html_lines)
+                logger.info(f"Final HTML length after cleanup: {len(final_html)} characters")
+                return final_html
             else:
+                logger.info(f"Using original HTML code, length: {len(html_code)} characters")
                 return html_code
                 
         except Exception as e:
@@ -272,11 +333,15 @@ async def query_templates(request: QueryRequest):
         #     request.include_sources
         # )
         logger.info(f"Query HTML templates result: {result}")
+        logger.info(f"Answer length in response: {len(result['answer'])} characters")
         
-        return QueryResponse(
+        response = QueryResponse(
             answer=result["answer"],
             sources=result["sources"]
         )
+        
+        logger.info(f"Final response answer length: {len(response.answer)} characters")
+        return response
         
     except Exception as e:
         error_msg = f"Error in query endpoint: {str(e)}"
@@ -312,11 +377,17 @@ async def generate_html(request: QueryRequest):
         # Then generate HTML
         html_code = rag_system.generate_html(request.query)
         
-        return QueryResponse(
+        logger.info(f"Generated HTML length: {len(html_code)} characters")
+        
+        response = QueryResponse(
             answer=result["answer"],
             sources=result["sources"] if request.include_sources else None,
             generated_html=html_code
         )
+        
+        logger.info(f"Final response answer length: {len(response.answer)} characters")
+        logger.info(f"Final response HTML length: {len(response.generated_html) if response.generated_html else 0} characters")
+        return response
         
     except Exception as e:
         error_msg = f"Error in query endpoint: {str(e)}"
