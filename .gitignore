@@ -1,2 +1,3 @@
-Mail/
-models/
+/models/
+/chroma_db/
+.env

@@ -3,7 +3,10 @@ import glob
 from pathlib import Path
 from bs4 import BeautifulSoup
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings
+# from langchain_openai import OpenAIEmbeddings
+from langchain_community.embeddings import GPT4AllEmbeddings
+# from langchain_community.llms import GPT4All
+from langchain import hub
 from langchain_community.vectorstores import Chroma
 from langchain.schema import Document
 from dotenv import load_dotenv
@@ -13,9 +16,15 @@ load_dotenv()
 class HTMLTemplateIngester:
     def __init__(self, persist_directory="./chroma_db"):
         self.persist_directory = persist_directory
-        self.embeddings = OpenAIEmbeddings(
-            model=os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
+
+        model_path = os.getenv("GGUF_MODEL_PATH", "models/q4_0-orca-mini-3b.gguf")
+        self.embeddings = GPT4AllEmbeddings(
+            model_path=model_path,
+            n_ctx=2048,
+            n_threads=6,
+            n_batch=64,
         )
+
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=int(os.getenv("CHUNK_SIZE", 1000)),
             chunk_overlap=int(os.getenv("CHUNK_OVERLAP", 200)),
@@ -121,175 +130,6 @@ Raw HTML:
         
         print(f"Successfully ingested {len(documents)} chunks from HTML templates")
         return vectorstore
-    
-    def create_sample_templates(self, templates_dir):
-        """Create sample HTML templates for demo"""
-        os.makedirs(templates_dir, exist_ok=True)
-        
-        samples = {
-            "landing_page.html": """<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Modern landing page template with hero section">
-    <title>Landing Page Template</title>
-    <style>
-        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .cta-button { background-color: #ff6b6b; color: white; padding: 12px 24px; }
-        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-    </style>
-</head>
-<body>
-    <header class="navigation">
-        <nav class="navbar">
-            <div class="logo">Brand</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Welcome to Our Platform</h1>
-            <p>Build amazing things with our modern solution</p>
-            <button class="cta-button">Get Started</button>
-        </div>
-    </section>
-    
-    <section class="features">
-        <div class="features-grid">
-            <div class="feature-card">
-                <h3>Fast Performance</h3>
-                <p>Lightning-fast loading times</p>
-            </div>
-            <div class="feature-card">
-                <h3>Responsive Design</h3>
-                <p>Works on all devices</p>
-            </div>
-            <div class="feature-card">
-                <h3>Easy to Use</h3>
-                <p>Intuitive user interface</p>
-            </div>
-        </div>
-    </section>
-</body>
-</html>""",
-            
-            "email_template.html": """<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Responsive email template for newsletters">
-    <title>Email Newsletter Template</title>
-    <style>
-        .email-container { max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; }
-        .header { background-color: #2c3e50; color: white; padding: 20px; text-align: center; }
-        .content { padding: 20px; background-color: #f8f9fa; }
-        .footer { background-color: #34495e; color: white; padding: 15px; text-align: center; }
-        .button { background-color: #3498db; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; }
-    </style>
-</head>
-<body>
-    <div class="email-container">
-        <div class="header">
-            <h1>Company Newsletter</h1>
-        </div>
-        
-        <div class="content">
-            <h2>Latest Updates</h2>
-            <p>Here are the latest news and updates from our team.</p>
-            
-            <div class="news-item">
-                <h3>New Feature Launch</h3>
-                <p>We're excited to announce our new dashboard feature.</p>
-                <a href="#" class="button">Learn More</a>
-            </div>
-            
-            <div class="news-item">
-                <h3>Upcoming Webinar</h3>
-                <p>Join us for an exclusive webinar next week.</p>
-                <a href="#" class="button">Register Now</a>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p>&copy; 2024 Company Name. All rights reserved.</p>
-            <p><a href="#" style="color: #bdc3c7;">Unsubscribe</a></p>
-        </div>
-    </div>
-</body>
-</html>""",
-            
-            "dashboard.html": """<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Admin dashboard template with sidebar and charts">
-    <title>Dashboard Template</title>
-    <style>
-        .dashboard { display: flex; min-height: 100vh; }
-        .sidebar { width: 250px; background-color: #2c3e50; color: white; padding: 20px; }
-        .main-content { flex: 1; padding: 20px; background-color: #ecf0f1; }
-        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
-        .stat-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .chart-container { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
-        .nav-item { padding: 10px 0; border-bottom: 1px solid #34495e; }
-    </style>
-</head>
-<body>
-    <div class="dashboard">
-        <aside class="sidebar">
-            <h2>Admin Panel</h2>
-            <nav>
-                <div class="nav-item"><a href="#dashboard">Dashboard</a></div>
-                <div class="nav-item"><a href="#users">Users</a></div>
-                <div class="nav-item"><a href="#analytics">Analytics</a></div>
-                <div class="nav-item"><a href="#settings">Settings</a></div>
-            </nav>
-        </aside>
-        
-        <main class="main-content">
-            <h1>Dashboard Overview</h1>
-            
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>Total Users</h3>
-                    <p class="stat-number">1,234</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Revenue</h3>
-                    <p class="stat-number">$12,345</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Orders</h3>
-                    <p class="stat-number">567</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Growth</h3>
-                    <p class="stat-number">+23%</p>
-                </div>
-            </div>
-            
-            <div class="chart-container">
-                <h3>Sales Analytics</h3>
-                <div id="chart-placeholder" style="height: 300px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">
-                    Chart placeholder - integrate with your preferred charting library
-                </div>
-            </div>
-        </main>
-    </div>
-</body>
-</html>"""
-        }
-        
-        for filename, content in samples.items():
-            with open(os.path.join(templates_dir, filename), 'w', encoding='utf-8') as f:
-                f.write(content)
-        
-        print(f"Created {len(samples)} sample templates in {templates_dir}")
 
 if __name__ == "__main__":
     ingester = HTMLTemplateIngester()
