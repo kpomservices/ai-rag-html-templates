@@ -3,13 +3,10 @@ import glob
 from pathlib import Path
 from bs4 import BeautifulSoup
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-# from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.schema import Document
 from dotenv import load_dotenv
 from sentence_transformers import SentenceTransformer
-# from langchain.embeddings import SentenceTransformerEmbeddings
-# from langchain_community.embeddings import SentenceTransformerEmbeddings
 from langchain_huggingface import HuggingFaceEmbeddings
 
 load_dotenv()
@@ -17,17 +14,8 @@ load_dotenv()
 class HTMLTemplateIngester:
     def __init__(self, persist_directory="./chroma_db"):
         self.persist_directory = persist_directory
-        # self.embeddings = OpenAIEmbeddings(
-        #     model=os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
-        # )
-
-        # self.embeddings = OpenAIEmbeddings(
-        #     model=os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
-        # )
 
         self.embeddings = HuggingFaceEmbeddings(model_name='all-MiniLM-L6-v2')
-        # self.embeddings = SentenceTransformerEmbeddings(model_name='all-MiniLM-L6-v2')
-        # self.embeddings = model.encode(texts)
 
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=int(os.getenv("CHUNK_SIZE", 1000)),

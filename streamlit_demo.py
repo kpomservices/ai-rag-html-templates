@@ -196,10 +196,9 @@ st.markdown("---")
 st.markdown("""
 ### Quick Start:
 1. Install dependencies: `pip install -r requirements.txt`
-2. Set up your OpenAI API key in `.env` file
-3. Run ingestion: `python ingest.py`
-4. Start API: `python main.py`
-5. Launch demo: `streamlit run demo.py`
+2. Run ingestion: `python ingest.py`
+3. Start API: `python main.py`
+4. Launch demo: `streamlit run demo.py`
 """)
 
 # Status indicator

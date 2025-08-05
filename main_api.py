@@ -6,7 +6,6 @@ import asyncio
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import Chroma
 from langchain_community.llms import HuggingFacePipeline
 from transformers import pipeline, AutoTokenizer
@@ -39,17 +38,7 @@ class QueryResponse(BaseModel):
 class HTMLRAGSystem:
     def __init__(self, persist_directory="./chroma_db"):
         self.persist_directory = persist_directory
-        # self.embeddings = OpenAIEmbeddings(
-        #     model=os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
-        # )
         self.embeddings = HuggingFaceEmbeddings(model_name='all-MiniLM-L6-v2')
-
-        # "model" => "gpt-4o-mini",
-        # self.llm = ChatOpenAI(
-        #     # model=os.getenv("LLM_MODEL", "gpt-3.5-turbo"),
-        #     model=os.getenv("LLM_MODEL", "gpt-4o-mini"),
-        #     temperature=0.1
-        # )
 
         # Get model from environment or use default
         # model_name = os.getenv("LLM_MODEL", "microsoft/DialoGPT-medium")
@@ -104,52 +93,6 @@ class HTMLRAGSystem:
                 }
             )
             print("✅ Using HuggingFace distilgpt2 model")
-        # Initialize with explicit tokenizer
-        # tokenizer = AutoTokenizer.from_pretrained(model_name)
-        # if tokenizer.pad_token is None:
-        #     tokenizer.pad_token = tokenizer.eos_token
-            
-        # pipe = pipeline(
-        #     "text-generation",
-        #     model=model_name,
-        #     tokenizer=tokenizer,
-        #     max_new_tokens=150,        # Use max_new_tokens instead of max_length
-        #     temperature=0.1,
-        #     do_sample=True,
-        #     pad_token_id=50256,
-        #     device=0 if torch.cuda.is_available() else -1,
-        #     return_full_text=False     # Only return the generated part
-        # )
-
-        # self.llm = HuggingFacePipeline(
-        #     pipeline=pipe,
-        #     model_kwargs={
-        #         "max_new_tokens": 150,    # New tokens to generate
-        #         "temperature": 0.1,
-        #         "do_sample": True,
-        #         "return_full_text": False
-        #     }
-        # )
-
-        # # Create the pipeline
-        # pipe = pipeline(
-        #     "text-generation",
-        #     model=model_name,
-        #     max_length=512,
-        #     temperature=0.1,  # Same temperature as your OpenAI config
-        #     do_sample=True,
-        #     pad_token_id=50256,  # Helps avoid warnings
-        #     device=0 if torch.cuda.is_available() else -1
-        # )
-        
-        # self.llm = HuggingFacePipeline(
-        #     pipeline=pipe,
-        #     model_kwargs={
-        #         "temperature": 0.1,
-        #         "max_length": 512,
-        #         "do_sample": True,
-        #     }
-        # )
     
         self.vectorstore = None
         self.qa_chain = None
@@ -322,16 +265,17 @@ async def query_templates(request: QueryRequest):
         """Query HTML templates and get answers"""
         
         # Server-side timeout handling
-        result = await asyncio.wait_for(
-            asyncio.to_thread(rag_system.query, request.query, request.max_results, request.include_sources),
-            timeout=480000  # 20 minutes
+        # result = await asyncio.wait_for(
+        #     asyncio.to_thread(rag_system.query, request.query, request.max_results, request.include_sources),
+        #     timeout=60  # 20 minutes
+        # )
+        
+        result = rag_system.query(
+            request.query, 
+            request.max_results, 
+            request.include_sources
         )
         
-        # result = rag_system.query(
-        #     request.query, 
-        #     request.max_results, 
-        #     request.include_sources
-        # )
         logger.info(f"Query HTML templates result: {result}")
         logger.info(f"Answer length in response: {len(result['answer'])} characters")
         
@@ -369,9 +313,15 @@ async def generate_html(request: QueryRequest):
         # result = rag_system.query(request.query, request.max_results, True)
         
         # Server-side timeout handling
-        result = await asyncio.wait_for(
-            asyncio.to_thread(rag_system.query, request.query, request.max_results, True),
-            timeout=480000  # 20 minutes
+        # result = await asyncio.wait_for(
+        #     asyncio.to_thread(rag_system.query, request.query, request.max_results, True),
+        #     timeout=60  # 20 minutes
+        # )
+        
+        result = rag_system.query(
+            request.query, 
+            request.max_results, 
+            request.include_sources
         )
 
         # Then generate HTML
