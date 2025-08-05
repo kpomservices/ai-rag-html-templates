@@ -328,6 +328,7 @@ async def query_templates(request: QueryRequest):
         #     timeout=480000  # 20 minutes
         # )
         
+        # Server-side timeout handling
         result = rag_system.query(
             request.query, 
             request.max_results, 
