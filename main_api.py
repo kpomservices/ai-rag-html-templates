@@ -252,11 +252,12 @@ Provide the complete HTML code without any explanations or additional text:""",
             sources = []
             if include_sources and "source_documents" in result:
                 for doc in result["source_documents"][:max_results]:
+                    logger.info(f"Answer preview: {doc}...")
                     sources.append({
                         "filename": doc.metadata.get("filename", "Unknown"),
                         "source": doc.metadata.get("source", "Unknown"),
                         "title": doc.metadata.get("title", ""),
-                        "content_preview": doc.page_content[:200] + "..." if len(doc.page_content) > 200 else doc.page_content
+                        "content_preview": doc.page_content[:500] + "..." if len(doc.page_content) > 200 else doc.page_content
                     })
             
             return {
@@ -322,16 +323,16 @@ async def query_templates(request: QueryRequest):
         """Query HTML templates and get answers"""
         
         # Server-side timeout handling
-        result = await asyncio.wait_for(
-            asyncio.to_thread(rag_system.query, request.query, request.max_results, request.include_sources),
-            timeout=480000  # 20 minutes
-        )
-        
-        # result = rag_system.query(
-        #     request.query, 
-        #     request.max_results, 
-        #     request.include_sources
+        # result = await asyncio.wait_for(
+        #     asyncio.to_thread(rag_system.query, request.query, request.max_results, request.include_sources),
+        #     timeout=480000  # 20 minutes
         # )
+        
+        result = rag_system.query(
+            request.query, 
+            request.max_results, 
+            request.include_sources
+        )
         logger.info(f"Query HTML templates result: {result}")
         logger.info(f"Answer length in response: {len(result['answer'])} characters")
         
@@ -369,9 +370,15 @@ async def generate_html(request: QueryRequest):
         # result = rag_system.query(request.query, request.max_results, True)
         
         # Server-side timeout handling
-        result = await asyncio.wait_for(
-            asyncio.to_thread(rag_system.query, request.query, request.max_results, True),
-            timeout=480000  # 20 minutes
+        # result = await asyncio.wait_for(
+        #     asyncio.to_thread(rag_system.query, request.query, request.max_results, True),
+        #     timeout=480000  # 20 minutes
+        # )
+
+        result = rag_system.query(
+            request.query, 
+            request.max_results, 
+            request.include_sources
         )
 
         # Then generate HTML
