@@ -154,64 +154,142 @@ Content Length: {len(content)} characters
             'description': description,
             'type': 'html_template'
         }
-    
 
-    
-    def ingest_templates(self, templates_dir="./templates"):
+    def ingest_templates(self, templates_dir="./dynamictemplates"):
         """Ingest all HTML templates from directory"""
-        documents = []
-        
-        # Support multiple file extensions
-        patterns = ["*.html", "*.htm", "*.mjml"]
-        
-        for pattern in patterns:
-            for file_path in glob.glob(os.path.join(templates_dir, "**", pattern), recursive=True):
-                print(f"Processing: {file_path}")
-                
-                try:
-                    content, metadata = self.extract_html_info(file_path)
-                    
-                    print(f"  ✓ Extracted {len(content)} characters from {Path(file_path).name}")
-                    
-                    # Split content into chunks
-                    texts = self.text_splitter.split_text(content)
-                    
-                    print(f"  ✓ Split into {len(texts)} chunks")
-                    
-                    # Create documents with enhanced metadata
-                    for i, text in enumerate(texts):
-                        doc_metadata = metadata.copy()
-                        doc_metadata['chunk_id'] = i
-                        doc_metadata['total_chunks'] = len(texts)
-                        doc_metadata['chunk_size'] = len(text)
-                        doc_metadata['chunk_start'] = i * (int(os.getenv("CHUNK_SIZE", 2000)) - int(os.getenv("CHUNK_OVERLAP", 300)))
-                        
-                        documents.append(Document(
-                            page_content=text,
-                            metadata=doc_metadata
-                        ))
-                        
-                    print(f"  ✓ Created {len(texts)} document chunks")
-                        
-                except Exception as e:
-                    print(f"  ❌ Error processing {file_path}: {e}")
-        
-        if not documents:
-            print(f"No HTML documents found in '{templates_dir}' directory.")
-            print("Please add HTML template files to the directory and run again.")
+        import shutil
+        import time
+
+        # Use the same method as create_sample_templates_from_folder for consistency
+        if not os.path.exists(templates_dir):
+            print(f"❌ Directory '{templates_dir}' does not exist!")
             return None
         
-        print(f"Creating vector store with {len(documents)} document chunks...")
-        
-        # Create vector store
+        # Find all HTML/MJML files in the directory
+        all_files = []
+        for filename in os.listdir(templates_dir):
+            file_path = os.path.join(templates_dir, filename)
+            if filename.endswith((".html", ".htm", ".mjml")) and os.path.isfile(file_path):
+                all_files.append(file_path)
+
+        # Also try glob as backup (for subdirectories)
+        patterns = ["*.html", "*.htm", "*.mjml"]
+        for pattern in patterns:
+            glob_files = glob.glob(os.path.join(templates_dir, "**", pattern), recursive=True)
+            for f in glob_files:
+                if f not in all_files:
+                    all_files.append(f)
+
+        if not all_files:
+            print(f"❌ No matching templates found in '{templates_dir}'")
+            return None
+
+        print(f"Found {len(all_files)} matching templates:")
+        for f in all_files:
+            print(f" - {f} ({os.path.getsize(f):,} bytes)")
+
+        # Force-clear Chroma DB, even if locked
+        if os.path.exists(self.persist_directory):
+            for attempt in range(3):
+                try:
+                    print(f"Clearing previous Chroma DB at {self.persist_directory}...")
+                    shutil.rmtree(self.persist_directory)
+                    break
+                except PermissionError:
+                    print(f"⚠ DB folder in use. Retrying in 1s... (Attempt {attempt+1}/3)")
+                    time.sleep(1)
+            else:
+                print("❌ Could not delete old Chroma DB. Please close any processes using it.")
+                return None
+
+        documents = []
+        processed_files = []
+
+        for file_path in all_files:
+            print(f"Processing: {file_path}")
+            try:
+                content, metadata = self.extract_html_info(file_path)
+                processed_files.append(file_path)
+
+                texts = self.text_splitter.split_text(content)
+                print(f"  → Split into {len(texts)} chunks")
+
+                for i, text in enumerate(texts):
+                    doc_metadata = metadata.copy()
+                    doc_metadata['chunk_id'] = i
+                    doc_metadata['total_chunks'] = len(texts)
+                    doc_metadata['chunk_size'] = len(text)
+                    doc_metadata['chunk_start'] = i * (int(os.getenv("CHUNK_SIZE", 2000)) - int(os.getenv("CHUNK_OVERLAP", 300)))
+                    # Add file index for uniqueness
+                    doc_metadata['file_index'] = len(processed_files) - 1
+
+                    documents.append(Document(
+                        page_content=text,
+                        metadata=doc_metadata
+                    ))
+
+            except Exception as e:
+                print(f"  ❌ Error processing {file_path}: {e}")
+
+        print(f"\n✅ Successfully processed {len(processed_files)} files:")
+        for i, fp in enumerate(processed_files):
+            print(f"  {i+1}. {Path(fp).name}")
+
+        if not documents:
+            print("❌ No documents prepared for ingestion.")
+            return None
+
+        # Show unique sources before saving
+        unique_sources = set(doc.metadata['source'] for doc in documents)
+        print(f"\nUnique sources in this ingestion ({len(unique_sources)} files):")
+        for src in unique_sources:
+            print(" -", src)
+
+        print(f"\nCreating vector store with {len(documents)} document chunks...")
         vectorstore = Chroma.from_documents(
             documents=documents,
             embedding=self.embeddings,
             persist_directory=self.persist_directory
         )
-        
-        print(f"Successfully ingested {len(documents)} chunks from HTML templates")
+
+        print(f"✅ Successfully ingested {len(documents)} chunks from HTML templates")
         return vectorstore
+
+
+def inspect_vectorstore(persist_directory, limit=10):
+    print("\n" + "=" * 50)
+    print("INSPECTING STORED CHROMA CONTENT")
+    print("=" * 50)
+
+    # Reopen the DB without embeddings (we only want to read metadata & docs)
+    db = Chroma(persist_directory=persist_directory, embedding_function=None)
+
+    try:
+        results = db.get()
+        total_docs = len(results['documents'])
+        print(f"Total stored documents: {total_docs}\n")
+
+        # Count documents per file
+        file_counts = {}
+        for metadata in results['metadatas']:
+            filename = metadata.get('filename', 'Unknown')
+            file_counts[filename] = file_counts.get(filename, 0) + 1
+        
+        print("📊 DOCUMENT DISTRIBUTION BY FILE:")
+        for filename, count in sorted(file_counts.items()):
+            print(f"  {filename}: {count} chunks")
+        print()
+
+        # Show sample documents
+        print("📋 SAMPLE DOCUMENTS:")
+        for i in range(min(limit, total_docs)):
+            print(f"--- Document #{i+1} ---")
+            print(f"ID: {results['ids'][i]}")
+            print(f"Metadata: {results['metadatas'][i]}")
+            print(f"Preview: {results['documents'][i][:300]}...")
+            print()
+    except Exception as e:
+        print(f"Error reading ChromaDB: {e}")
 
 def main():
     """Main function to run the ingestion process"""
@@ -261,6 +339,7 @@ def main():
         print("=" * 50)
         print(f"✓ Vector store saved to: {ingester.persist_directory}")
         print("✓ Ready for RAG queries!")
+        inspect_vectorstore(ingester.persist_directory, limit=10)
         
         # Show chunking statistics
         print(f"\nChunking Settings:")
