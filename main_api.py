@@ -61,10 +61,10 @@ class HTMLRAGSystem:
         # Try Ollama first, fallback to HuggingFace if not available
         try:
             self.llm = Ollama(
-                model="tinyllama",  # Fast and reliable model
+                model="llama3.2:3b",  # Fast and reliable model
                 temperature=0.1,
-                num_ctx=4096,      # Increased context window
-                num_predict=2048,  # Increased max tokens to generate for longer responses
+                num_ctx=8192,      # Increased context window
+                num_predict=4096,  # Increased max tokens to generate for longer responses
                 stop=["</s>", "Human:", "Assistant:"]  # Stop tokens to prevent incomplete responses
             )
             print("✅ Using Ollama with tinyllama model")

@@ -1,0 +1,70 @@
+<mjml css-class="mjmlblock mjml mjml1-54574995"><parsererror style="display: block; white-space: pre; border: 2px solid #c77; padding: 0 1em 0 1em; margin: 1em; background-color: #fdd; color: black" css-class="mjmlblock parsererror parsererror1-44554745"><h3 css-class="mjmlblock h3 h31-51547244">This page contains the following errors:</h3><div style="font-family:monospace;font-size:12px" css-class="mjmlblock div div1-45445255">error on line 71 at column 124: attributes construct error
+</div><h3 css-class="mjmlblock h3 h31-55444545">Below is a rendering of the page up to the first error.</h3></parsererror>
+  <mj-body background-color="#F4F4F4" color="#55575d" font-family="Arial, sans-serif" css-class="mjmlblock mj-body mj-body1-55514249">
+    <mj-section background-color="#ffffff" background-repeat="repeat" padding-bottom="0px" padding-top="30px" padding="20px 0" text-align="center" vertical-align="top" css-class="mjmlblock mj-section mj-section1-91125141">
+      <mj-column css-class="mjmlblock mj-column mj-column1-24554515">
+        <mj-image align="center" padding="10px 25px" src="https://www.arturia.com/images/newsletters/2016-02-ispark/06.jpg" target="_blank" width="214px" css-class="mjmlblock mj-image mj-image1-45141754"/>
+        <mj-text align="left" color="#55575d" font-family="Arial, sans-serif" font-size="13px" line-height="22px" padding-bottom="15px" padding-top="0px" padding="10px 25px" css-class="mjmlblock mj-text mj-text1-51179114">
+          <p style="text-align: center; margin: 10px 0;color:#151e23;font-size:14px;font-family:Georgia,Helvetica,Arial,sans-serif" css-class="mjmlblock p p1-55715154">Product | Concept | Contact</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-repeat="repeat" padding-bottom="0px" padding-top="0px" padding="20px 0" text-align="center" vertical-align="top" css-class="mjmlblock mj-section mj-section1-55947117">
+      <mj-column css-class="mjmlblock mj-column mj-column1-55459559">
+        <mj-image align="center" padding-bottom="0px" padding-left="0px" padding-right="0px" padding-top="0px" padding="10px 25px" src="https://www.arturia.com/images/newsletters/2016-02-ispark/07.jpg" target="_blank" width="600px" css-class="mjmlblock mj-image mj-image1-55574145"/>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" background-repeat="repeat" background-size="auto" padding-bottom="0px" padding-top="30px" padding="20px 0" text-align="center" vertical-align="top" css-class="mjmlblock mj-section mj-section1-59541277">
+      <mj-column css-class="mjmlblock mj-column mj-column1-55279755">
+        <mj-text align="left" color="#55575d" font-family="Arial, sans-serif" font-size="30px" line-height="22px" padding-bottom="10px" padding-top="10px" padding="10px 25px" css-class="mjmlblock mj-text mj-text1-54575455">
+          <p style="line-height: 30px; margin: 10px 0; text-align: center; color:#151e23; font-size:30p; font-family:Georgia,Helvetica,Arial,sans-serif" css-class="mjmlblock p p1-75727155">- Our Holiday Recipes -</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" background-repeat="repeat" padding-bottom="0px" padding="20px 0" text-align="center" vertical-align="top" css-class="mjmlblock mj-section mj-section1-57575575">
+      <mj-column css-class="mjmlblock mj-column mj-column1-12117524">
+        <mj-image align="center" padding-bottom="20px" padding-left="30px" padding-right="30px" padding-top="0px" padding="10px 25px" src="https://www.arturia.com/images/newsletters/2016-02-ispark/08.jpg" target="_blank" width="1200px" css-class="mjmlblock mj-image mj-image1-27275995"/>
+      </mj-column>
+      <mj-column css-class="mjmlblock mj-column mj-column1-94422552">
+        <mj-text align="left" color="#55575d" font-family="Arial, sans-serif" font-size="13px" line-height="22px" padding-bottom="0px" padding-left="40px" padding-right="40px" padding-top="0px" padding="10px 25px" css-class="mjmlblock mj-text mj-text1-54154757">
+          <p style="margin: 10px 0; color:#151e23; font-size:16px; font-family:Georgia,Helvetica,Arial,sans-serif" css-class="mjmlblock p p1-44159755"><b css-class="mjmlblock b b1-52752774">Cake Title</b></p>
+          <p style="line-height: 16px; margin: 10px 0;font-size:14px; color:#151e23; font-family:Georgia,Helvetica,Arial,sans-serif; color:#354552" css-class="mjmlblock p p1-12554544">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+          <p style="line-height: 16px; margin: 10px 0; color:#354552; font-size:14px; font-family:Georgia,Helvetica,Arial,sans-serif" css-class="mjmlblock p p1-45411515"><u css-class="mjmlblock u u1-41597175">Choose me</u> &gt;</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" background-repeat="repeat" direction="rtl" padding-bottom="0px" padding-top="0px" padding="20px 0" text-align="center" vertical-align="top" css-class="mjmlblock mj-section mj-section1-14421555">
+      <mj-column css-class="mjmlblock mj-column mj-column1-42755547">
+        <mj-image align="center" padding-bottom="20px" padding-left="30px" padding-right="30px" padding-top="20px" padding="10px 25px" src="https://www.arturia.com/images/newsletters/2016-02-ispark/08.jpg" target="_blank" width="1200px" css-class="mjmlblock mj-image mj-image1-75572779"/>
+      </mj-column>
+      <mj-column css-class="mjmlblock mj-column mj-column1-15454755">
+        <mj-text align="left" color="#55575d" font-family="Arial, sans-serif" font-size="13px" line-height="22px" padding-bottom="0px" padding-left="40px" padding-right="40px" padding-top="0px" padding="10px 25px" css-class="mjmlblock mj-text mj-text1-17445515">
+          <p style="margin: 10px 0; color:#151e23; font-size:16px; font-family:Georgia,Helvetica,Arial,sans-serif" css-class="mjmlblock p p1-74419145"><b css-class="mjmlblock b b1-54114547">Cake Title</b></p>
+          <p style="line-height: 16px; margin: 10px 0;font-size:14px; color:#151e23; font-family:Georgia,Helvetica,Arial,sans-serif; color:#354552" css-class="mjmlblock p p1-72944959">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+          <p style="line-height: 16px; margin: 10px 0; color:#354552; font-size:14px; font-family:Georgia,Helvetica,Arial,sans-serif" css-class="mjmlblock p p1-51544452"><u css-class="mjmlblock u u1-15474171">Choose me</u> &gt;</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" background-repeat="repeat" padding-bottom="0px" padding-top="0px" padding="20px 0" text-align="center" vertical-align="top" css-class="mjmlblock mj-section mj-section1-71144157">
+      <mj-column css-class="mjmlblock mj-column mj-column1-72459112">
+        <mj-image align="center" padding-bottom="20px" padding-left="30px" padding-right="30px" padding-top="20px" padding="10px 25px" src="https://www.arturia.com/images/newsletters/2016-02-ispark/05.jpg" target="_blank" width="1200px" css-class="mjmlblock mj-image mj-image1-54475477"/>
+      </mj-column>
+      <mj-column css-class="mjmlblock mj-column mj-column1-25575212">
+        <mj-text align="left" color="#55575d" font-family="Arial, sans-serif" font-size="13px" line-height="22px" padding-bottom="0px" padding-left="40px" padding-right="40px" padding-top="0px" padding="10px 25px" css-class="mjmlblock mj-text mj-text1-55147272">
+          <p style="margin: 10px 0; color:#151e23; font-size:16px; font-family:Georgia,Helvetica,Arial,sans-serif" css-class="mjmlblock p p1-52545154"><b css-class="mjmlblock b b1-71157495">Cake Title</b></p>
+          <p style="line-height: 16px; margin: 10px 0;font-size:14px; color:#151e23; font-family:Georgia,Helvetica,Arial,sans-serif; color:#354552" css-class="mjmlblock p p1-51571754">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+          <p style="line-height: 16px; margin: 10px 0; color:#354552; font-size:14px; font-family:Georgia,Helvetica,Arial,sans-serif" css-class="mjmlblock p p1-51454247"><u css-class="mjmlblock u u1-55144241">Choose me</u> &gt;</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" background-repeat="repeat" padding-top="0px" padding="20px 0" text-align="center" vertical-align="top" css-class="mjmlblock mj-section mj-section1-95791441">
+      <mj-column css-class="mjmlblock mj-column mj-column1-44474455">
+        <mj-button align="center" background-color="#354552" border-radius="3px" color="#ffffff" font-family="Georgia, Helvetica, Arial, sans-serif" font-size="14px" font-weight="normal" inner-padding="10px 25px" padding="10px 25px" text-decoration="none" text-transform="none" vertical-align="middle" css-class="mjmlblock mj-button mj-button1-41452447">Discover all desserts</mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" background-repeat="repeat" padding-bottom="0px" padding-top="0px" padding="20px 0" text-align="center" vertical-align="top" css-class="mjmlblock mj-section mj-section1-12547574">
+      <mj-column css-class="mjmlblock mj-column mj-column1-77424141">
+        <mj-image align="center" padding-bottom="0px" padding-left="0px" padding-right="0px" padding-top="0px" padding="10px 25px" src="https://www.arturia.com/images/newsletters/2016-02-ispark/05.jpg" target="_blank" width="600px" css-class="mjmlblock mj-image mj-image1-47594455"/>
+      </mj-column>
+    </mj-section>
+    </mj-body></mjml>

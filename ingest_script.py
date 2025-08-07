@@ -6,6 +6,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 from langchain.schema import Document
 from dotenv import load_dotenv
+
 # Option 1: Use langchain_huggingface (recommended)
 try:
     from langchain_huggingface import HuggingFaceEmbeddings
@@ -88,7 +89,8 @@ class HTMLTemplateIngester:
         
         for filename in os.listdir(templates_dir):
             file_path = os.path.join(templates_dir, filename)
-            if filename.endswith(".html") and os.path.isfile(file_path):
+            # FIXED: Now includes .txt files like the ingest_templates method
+            if filename.endswith((".html", ".htm", ".mjml", ".txt")) and os.path.isfile(file_path):
                 try:
                     with open(file_path, 'r', encoding='utf-8') as file:
                         templates[filename] = file.read()
@@ -96,7 +98,7 @@ class HTMLTemplateIngester:
                 except Exception as e:
                     print(f"Error reading {filename}: {e}")
         
-        print(f"Found {len(templates)} HTML templates in {templates_dir}")
+        print(f"Found {len(templates)} templates in {templates_dir}")
         return templates
         
     def extract_html_info(self, file_path):
@@ -104,34 +106,74 @@ class HTMLTemplateIngester:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
         
-        soup = BeautifulSoup(content, 'html.parser')
+        # Check if it's a text file or HTML file
+        file_extension = Path(file_path).suffix.lower()
         
-        # Extract metadata
-        title = soup.find('title')
-        title_text = title.get_text().strip() if title else ""
-        
-        # Extract meta description
-        meta_desc = soup.find('meta', attrs={'name': 'description'})
-        description = meta_desc.get('content', '') if meta_desc else ""
-        
-        # Extract main content areas
-        sections = []
-        
-        # Headers
-        for header in soup.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
-            sections.append(f"Header: {header.get_text().strip()}")
-        
-        # Extract classes and IDs for styling reference
-        elements_with_classes = soup.find_all(class_=True)
-        classes = set()
-        for elem in elements_with_classes[:10]:  # Limit to avoid too much noise
-            classes.update(elem.get('class', []))
-        
-        elements_with_ids = soup.find_all(id=True)
-        ids = [elem.get('id') for elem in elements_with_ids[:10]]
-        
-        # Create structured content with better formatting
-        structured_content = f"""
+        if file_extension == '.txt':
+
+             # Check if MJML tags exist inside the .txt file
+            if "<mjml" in content and "</mjml>" in content:
+                print(f"Detected MJML content inside .txt file: {file_path}")
+                soup = BeautifulSoup(content, 'xml')
+
+                mjml_texts = [tag.get_text(strip=True) for tag in soup.find_all('mj-text')]
+                mjml_buttons = [tag.get_text(strip=True) for tag in soup.find_all('mj-button')]
+                mjml_images = [tag.get('src') for tag in soup.find_all('mj-image') if tag.get('src')]
+            print(f"❌ MJML ============== TEXT templates found")
+            print(f"+===========+ MJML '{soup}' +===========+")
+            # For text files, create simpler metadata
+#             structured_content = f"""
+# === TEMPLATE METADATA ===
+# Type: MJML Template (from .txt)
+# Text Blocks: {len(mjml_texts)}
+# Buttons: {', '.join(mjml_buttons) if mjml_buttons else 'None'}
+# Images: {', '.join(mjml_images) if mjml_images else 'None'}
+# Content Length: {len(content)} characters
+
+# === TEXT CONTENT ===
+# {content}
+
+# === END OF TEMPLATE ===
+#             """.strip()
+            
+            return structured_content, {
+                'source': str(file_path),
+                'filename': Path(file_path).name,
+                'title': Path(file_path).stem,
+                'description': f"Text template: {Path(file_path).name}",
+                'type': 'text_template'
+            }
+        else:
+            print(f"❌ MJML TEXT templates NOT found")
+            # Original HTML processing
+            soup = BeautifulSoup(content, 'html.parser')
+            
+            # Extract metadata
+            title = soup.find('title')
+            title_text = title.get_text().strip() if title else ""
+            
+            # Extract meta description
+            meta_desc = soup.find('meta', attrs={'name': 'description'})
+            description = meta_desc.get('content', '') if meta_desc else ""
+            
+            # Extract main content areas
+            sections = []
+            
+            # Headers
+            for header in soup.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
+                sections.append(f"Header: {header.get_text().strip()}")
+            
+            # Extract classes and IDs for styling reference
+            elements_with_classes = soup.find_all(class_=True)
+            classes = set()
+            for elem in elements_with_classes[:10]:  # Limit to avoid too much noise
+                classes.update(elem.get('class', []))
+            
+            elements_with_ids = soup.find_all(id=True)
+            ids = [elem.get('id') for elem in elements_with_ids[:10]]
+            
+            # Create structured content with better formatting
+            structured_content = f"""
 === TEMPLATE METADATA ===
 File: {Path(file_path).name}
 Title: {title_text}
@@ -145,15 +187,15 @@ Content Length: {len(content)} characters
 {content}
 
 === END OF TEMPLATE ===
-        """.strip()
-        
-        return structured_content, {
-            'source': str(file_path),
-            'filename': Path(file_path).name,
-            'title': title_text,
-            'description': description,
-            'type': 'html_template'
-        }
+            """.strip()
+            
+            return structured_content, {
+                'source': str(file_path),
+                'filename': Path(file_path).name,
+                'title': title_text,
+                'description': description,
+                'type': 'html_template'
+            }
 
     def ingest_templates(self, templates_dir="./dynamictemplates"):
         """Ingest all HTML templates from directory"""
@@ -165,15 +207,15 @@ Content Length: {len(content)} characters
             print(f"❌ Directory '{templates_dir}' does not exist!")
             return None
         
-        # Find all HTML/MJML files in the directory
+        # Find all HTML/MJML/TXT files in the directory
         all_files = []
         for filename in os.listdir(templates_dir):
             file_path = os.path.join(templates_dir, filename)
-            if filename.endswith((".html", ".htm", ".mjml")) and os.path.isfile(file_path):
+            if filename.endswith((".html", ".htm", ".mjml", ".txt")) and os.path.isfile(file_path):
                 all_files.append(file_path)
 
         # Also try glob as backup (for subdirectories)
-        patterns = ["*.html", "*.htm", "*.mjml"]
+        patterns = ["*.html", "*.htm", "*.mjml", "*.txt"]
         for pattern in patterns:
             glob_files = glob.glob(os.path.join(templates_dir, "**", pattern), recursive=True)
             for f in glob_files:
@@ -252,7 +294,7 @@ Content Length: {len(content)} characters
             persist_directory=self.persist_directory
         )
 
-        print(f"✅ Successfully ingested {len(documents)} chunks from HTML templates")
+        print(f"✅ Successfully ingested {len(documents)} chunks from templates")
         return vectorstore
 
 
@@ -313,8 +355,8 @@ def main():
     templates = ingester.create_sample_templates_from_folder(templates_dir)
     
     if not templates:
-        print(f"❌ No HTML templates found in '{templates_dir}' directory.")
-        print("Please add HTML template files to the directory and run again.")
+        print(f"❌ No templates found in '{templates_dir}' directory.")
+        print("Please add template files (.html, .htm, .mjml, .txt) to the directory and run again.")
         return None
     
     # Display loaded templates with size info
@@ -322,7 +364,8 @@ def main():
     for filename, content in templates.items():
         size = len(content)
         total_size += size
-        print(f"✓ {filename} ({size:,} characters)")
+        file_type = "TEXT" if filename.endswith('.txt') else "HTML"
+        print(f"✓ {filename} ({size:,} characters) [{file_type}]")
     
     print(f"\nTotal content: {total_size:,} characters across {len(templates)} templates")
     

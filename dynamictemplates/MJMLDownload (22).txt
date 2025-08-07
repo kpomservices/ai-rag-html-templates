@@ -1,0 +1,22 @@
+<mjml css-class="mjmlblock mjml mjml1-40005444">
+  <mj-body background-color="#ffffff" font-size="13px" css-class="mjmlblock mj-body mj-body1-54515145">
+    <mj-section background-color="#ffffff" padding-bottom="0px" padding-top="0" css-class="mjmlblock mj-section mj-section1-05544504">
+      <mj-column vertical-align="top" width="100%" css-class="mjmlblock mj-column mj-column1-74005007">
+        <mj-image src="https://www.arturia.com/images/newsletters/2016-02-ispark/06.jpg" alt="" align="center" border="none" width="600px" padding-left="0px" padding-right="0px" padding-bottom="0px" padding-top="0" css-class="mjmlblock mj-image mj-image1-44144741"/>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#009FE3" vertical-align="top" padding-bottom="0px" padding-top="0" css-class="mjmlblock mj-section mj-section1-44447574">
+      <mj-column vertical-align="top" width="100%" css-class="mjmlblock mj-column mj-column1-55571751">
+        <mj-text align="left" color="#ffffff" font-size="45px" font-weight="bold" font-family="open Sans Helvetica, Arial, sans-serif" padding-left="25px" padding-right="25px" padding-bottom="30px" padding-top="50px" css-class="mjmlblock mj-text mj-text1-57055544">Welcome aboard</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#009fe3" padding-bottom="20px" padding-top="20px" css-class="mjmlblock mj-section mj-section1-55544555">
+      <mj-column vertical-align="middle" width="100%" css-class="mjmlblock mj-column mj-column1-44455444">
+        <mj-text align="left" color="#ffffff" font-size="22px" font-family="open Sans Helvetica, Arial, sans-serif" padding-left="25px" padding-right="25px" css-class="mjmlblock mj-text mj-text1-14575504"><span style="color:#FEEB35" css-class="mjmlblock span span1-41555450">Dear [[FirstName]]</span><br css-class="mjmlblock br br1-40554444"/><br css-class="mjmlblock br br1-11044540"/> Welcome to [[CompanyName]].</mj-text>
+        <mj-text align="left" color="#ffffff" font-size="15px" font-family="open Sans Helvetica, Arial, sans-serif" padding-left="25px" padding-right="25px" css-class="mjmlblock mj-text mj-text1-55505044">We're really excited you've decided to give us a try. In case you have any questions, feel free to reach out to us at [[ContactEmail]]. You can login to your account with your username [[UserName]]</mj-text>
+        <mj-button align="left" font-size="22px" font-weight="bold" background-color="#ffffff" border-radius="10px" color="#1AA0E1" font-family="open Sans Helvetica, Arial, sans-serif" css-class="mjmlblock mj-button mj-button1-54445577">Login23</mj-button>
+        <mj-text align="left" color="#ffffff" font-size="15px" font-family="open Sans Helvetica, Arial, sans-serif" padding-left="25px" padding-right="25px" css-class="mjmlblock mj-text mj-text1-55154404">Thanks, <br css-class="mjmlblock br br1-05545145"/> The [[CompanyName]] Team</mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

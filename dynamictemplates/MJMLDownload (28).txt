@@ -1,0 +1,55 @@
+<mjml css-class="mjmlblock mjml mjml1-55454554">
+  <mj-head css-class="mjmlblock mj-head mj-head1-54444758">
+    <mj-attributes css-class="mjmlblock mj-attributes mj-attributes1-51155557">
+      <mj-all padding="0px" css-class="mjmlblock mj-all mj-all1-44841117"/>
+      <mj-class name="preheader" color="#000000" font-size="11px" font-family="Ubuntu, Helvetica, Arial, sans-serif" padding="0px" css-class="mjmlblock mj-class mj-class1-51741558"/>
+    </mj-attributes>
+    <mj-style inline="inline" css-class="mjmlblock mj-style mj-style1-84411441">a { text-decoration: none; color: inherit; }</mj-style>
+  </mj-head>
+  <mj-body background-color="#e0f2ff" css-class="mjmlblock mj-body mj-body1-14745444">
+    <mj-section background-color="#2a5cab" padding="10px 0" css-class="mjmlblock mj-section mj-section1-51445841">
+      <mj-column width="33%" css-class="mjmlblock mj-column mj-column1-14448857">
+        <mj-image src="https://www.arturia.com/images/newsletters/2016-02-ispark/08.jpg" alt="logo" width="150px" padding="10px 0" css-class="mjmlblock mj-image mj-image1-54558451"/>
+      </mj-column>
+      <mj-column width="66%" css-class="mjmlblock mj-column mj-column1-45455485">
+        <mj-text align="left" color="#ffffff" font-size="20px" font-family="Lato, Helvetica, Arial, sans-serif" padding="18px 0px" css-class="mjmlblock mj-text mj-text1-44574444">the only way to travel</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" padding-top="20px" css-class="mjmlblock mj-section mj-section1-45118854">
+      <mj-column width="100%" css-class="mjmlblock mj-column mj-column1-15454551">
+        <mj-image src="https://www.arturia.com/images/newsletters/2016-02-ispark/08.jpg" alt="tickets" width="192px" padding="10px 25px" css-class="mjmlblock mj-image mj-image1-54455111"/>
+        <mj-text align="center" color="#FAB701" font-size="25px" font-family="Lato, Helvetica, Arial, sans-serif" padding="10px 25px" css-class="mjmlblock mj-text mj-text1-57144445"><strong css-class="mjmlblock strong strong1-75445871">Hey {{FirstName}}
+            <br css-class="mjmlblock br br1-45515415"/>
+            <br css-class="mjmlblock br br1-54474145"/>
+            It's been a long time since you last traveled with us.
+          </strong></mj-text>
+        <mj-text align="center" color="#EC652D" font-size="18px" font-family="Lato, Helvetica, Arial, sans-serif" padding="10px 30px" css-class="mjmlblock mj-text mj-text1-84444144"><strong css-class="mjmlblock strong strong1-14544444">Have a look at some of the top destinations people are booking right now!</strong></mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" padding="20px 0" css-class="mjmlblock mj-section mj-section1-57457518">
+      <mj-column css-class="mjmlblock mj-column mj-column1-14788514">
+        <mj-image src="https://www.arturia.com/images/newsletters/2016-02-ispark/05.jpg" alt="New York" width="184px" padding="0 25px" css-class="mjmlblock mj-image mj-image1-44444554"/>
+        <mj-text align="center" color="#EC652D" font-size="20px" font-family="Lato, Helvetica, Arial, sans-serif" vertical-align="top" padding="20px 25px" css-class="mjmlblock mj-text mj-text1-48745515"><strong css-class="mjmlblock strong strong1-14844454">New York</strong> <br css-class="mjmlblock br br1-11474177"/>
+          <p style="font-size: 15px;color:#000000;" css-class="mjmlblock p p1-15111544">$399 </p>
+        </mj-text>
+      </mj-column>
+      <mj-column css-class="mjmlblock mj-column mj-column1-75414845">
+        <mj-image src="https://www.arturia.com/images/newsletters/2016-02-ispark/05.jpg" alt="London" width="184px" padding="0 25px" css-class="mjmlblock mj-image mj-image1-58418478"/>
+        <mj-text align="center" color="#EC652D" font-size="20px" font-family="Lato, Helvetica, Arial, sans-serif" vertical-align="top" padding="20px 25px" css-class="mjmlblock mj-text mj-text1-41745414"><strong css-class="mjmlblock strong strong1-51541155">London</strong> <br css-class="mjmlblock br br1-15557855"/>
+          <p style="font-size: 15px;color:#000000;" css-class="mjmlblock p p1-85544478">$399 </p>
+        </mj-text>
+      </mj-column>
+      <mj-column css-class="mjmlblock mj-column mj-column1-45474475">
+        <mj-image src="https://www.arturia.com/images/newsletters/2016-02-ispark/05.jpg" alt="Berlin" width="184px" padding="0 25px" css-class="mjmlblock mj-image mj-image1-44554445"/>
+        <mj-text align="center" color="#EC652D" font-size="20px" font-family="Lato, Helvetica, Arial, sans-serif" vertical-align="top" padding="20px 25px" css-class="mjmlblock mj-text mj-text1-45545454"><strong css-class="mjmlblock strong strong1-74544444">Berlin</strong> <br css-class="mjmlblock br br1-55547444"/>
+          <p style="font-size: 15px;color:#000000;" css-class="mjmlblock p p1-48448454">$399 </p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#FAB700" padding="10px" css-class="mjmlblock mj-section mj-section1-45514117">
+      <mj-column vertical-align="top" width="100%" css-class="mjmlblock mj-column mj-column1-54851454">
+        <mj-text align="center" color="#EC652D" font-size="20px" font-family="Lato, Helvetica, Arial, sans-serif" padding="10px 25px" css-class="mjmlblock mj-text mj-text1-71451414">Best, <br css-class="mjmlblock br br1-48854545"/><br css-class="mjmlblock br br1-74415858"/> The {{Company}} Team</mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

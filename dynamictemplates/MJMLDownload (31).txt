@@ -1,0 +1,52 @@
+<mjml css-class="mjmlblock mjml mjml1-51951494">
+  <mj-body css-class="mjmlblock mj-body mj-body1-74475949">
+    <mj-section css-class="mjmlblock mj-section mj-section1-45745545">
+      <mj-column css-class="mjmlblock mj-column mj-column1-44915414">
+        <mj-image src="https://picsum.photos/800/400" alt="Brand Logo" css-class="mjmlblock mj-image mj-image1-15455741"/>
+        <mj-divider border-color="#007bff" css-class="mjmlblock mj-divider mj-divider1-49541479"/>
+        <mj-text align="center" font-size="24px" color="#007bff" font-weight="bold" css-class="mjmlblock mj-text mj-text1-51445445"><p css-class="mjmlblock p p1-74155555">Black Friday Sale! 1🎉</p>
+</mj-text>
+        <mj-text align="center" font-size="16px" color="#333333" css-class="mjmlblock mj-text mj-text1-49414175">Don't miss out on our biggest sale of the year!</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section css-class="mjmlblock mj-section mj-section1-47541595">
+      <mj-column css-class="mjmlblock mj-column mj-column1-75195715">
+        <mj-image src="https://picsum.photos/800/400" alt="Black Friday Sale" css-class="mjmlblock mj-image mj-image1-77471944"/>
+      </mj-column>
+    </mj-section>
+    <mj-section css-class="mjmlblock mj-section mj-section1-47455757">
+      <mj-column width="33%" css-class="mjmlblock mj-column mj-column1-59797717">
+        <mj-image src="https://picsum.photos/400/300" alt="Product 1" css-class="mjmlblock mj-image mj-image1-44477441"/>
+        <mj-text align="center" font-size="18px" font-weight="bold" css-class="mjmlblock mj-text mj-text1-54744514">Product 1</mj-text>
+        <mj-text align="center" font-size="16px" color="#FF5733" css-class="mjmlblock mj-text mj-text1-97475754">$49.99</mj-text>
+        <mj-button background-color="#007bff" color="white" href="#" css-class="mjmlblock mj-button mj-button1-47947754">Shop Now</mj-button>
+      </mj-column>
+      <mj-column width="33%" css-class="mjmlblock mj-column mj-column1-55474714">
+        <mj-image src="https://picsum.photos/400/300" alt="Product 2" css-class="mjmlblock mj-image mj-image1-59557444"/>
+        <mj-text align="center" font-size="18px" font-weight="bold" css-class="mjmlblock mj-text mj-text1-44145114">Product 2</mj-text>
+        <mj-text align="center" font-size="16px" color="#FF5733" css-class="mjmlblock mj-text mj-text1-55441559">$69.99</mj-text>
+        <mj-button background-color="#007bff" color="white" href="#" css-class="mjmlblock mj-button mj-button1-55145479">Shop Now</mj-button>
+      </mj-column>
+      <mj-column width="33%" css-class="mjmlblock mj-column mj-column1-94554144">
+        <mj-image src="https://picsum.photos/400/300" alt="Product 3" css-class="mjmlblock mj-image mj-image1-97149457"/>
+        <mj-text align="center" font-size="18px" font-weight="bold" css-class="mjmlblock mj-text mj-text1-51554157">Product 3</mj-text>
+        <mj-text align="center" font-size="16px" color="#FF5733" css-class="mjmlblock mj-text mj-text1-44759955">$89.99</mj-text>
+        <mj-button background-color="#007bff" color="white" href="#" css-class="mjmlblock mj-button mj-button1-44547415">Shop Now</mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-section css-class="mjmlblock mj-section mj-section1-74745944">
+      <mj-column css-class="mjmlblock mj-column mj-column1-14745149">
+        <mj-text align="center" font-size="20px" font-weight="bold" css-class="mjmlblock mj-text mj-text1-44455447">Limited Time Offer!</mj-text>
+        <mj-text align="center" font-size="16px" css-class="mjmlblock mj-text mj-text1-44517444">Use code <strong css-class="mjmlblock strong strong1-44515755">BLACKFRIDAY</strong> at checkout for an additional 20% off!</mj-text>
+        <mj-button background-color="#007bff" color="white" href="#" css-class="mjmlblock mj-button mj-button1-54454445">Shop All Deals</mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-section css-class="mjmlblock mj-section mj-section1-47455449">
+      <mj-column css-class="mjmlblock mj-column mj-column1-55541455">
+        <mj-divider border-color="#007bff" css-class="mjmlblock mj-divider mj-divider1-49747914"/>
+        <mj-text align="center" font-size="14px" color="#999999" css-class="mjmlblock mj-text mj-text1-15971974">You are receiving this email because you signed up for our newsletter.</mj-text>
+        <mj-button background-color="transparent" color="#007bff" href="#" css-class="mjmlblock mj-button mj-button1-15755571">Unsubscribe</mj-button>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

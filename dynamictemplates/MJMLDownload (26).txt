@@ -1,0 +1,112 @@
+<mjml css-class="mjmlblock mjml mjml1-75153427">
+  <mj-head css-class="mjmlblock mj-head mj-head1-75454444">
+    <mj-attributes css-class="mjmlblock mj-attributes mj-attributes1-34445414">
+      <mj-text font-family="Ubuntu, Helvetica, Arial, sans-serif" color="#000000" css-class="mjmlblock mj-text mj-text1-45534454"/>
+      <mj-class name="description" css-class="mjmlblock mj-class mj-class1-55541522"/>
+      <mj-class name="preheader" color="#000000" font-size="11px" padding-left="25px" padding-right="25px" css-class="mjmlblock mj-class mj-class1-55543445"/>
+      <mj-class name="button" background-color="#fcc245" color="#000000" font-size="18px" border-radius="3px" font-family="Ubuntu, Helvetica, Arial, sans-serif" css-class="mjmlblock mj-class mj-class1-24475544"/>
+    </mj-attributes>
+    <mj-style inline="inline" css-class="mjmlblock mj-style mj-style1-45222231">a { text-decoration: none!important; }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#ffffff" css-class="mjmlblock mj-body mj-body1-25251221">
+    <mj-section padding-bottom="20px" padding-top="20px" css-class="mjmlblock mj-section mj-section1-47232441">
+      <mj-group css-class="mjmlblock mj-group mj-group1-42425454">
+        <mj-column css-class="mjmlblock mj-column mj-column1-41544544">
+          <mj-text align="left" mj-class="preheader" css-class="mjmlblock mj-text mj-text1-51174422">[[HEADLINE]]</mj-text>
+        </mj-column>
+        <mj-column css-class="mjmlblock mj-column mj-column1-24545222">
+          <mj-text align="right" mj-class="preheader" css-class="mjmlblock mj-text mj-text1-44545425">[PERMALINK_LABEL]]</mj-text>
+        </mj-column>
+      </mj-group>
+    </mj-section>
+    <mj-section padding-bottom="0px" padding-top="0" css-class="mjmlblock mj-section mj-section1-12534153">
+      <mj-column width="25%" css-class="mjmlblock mj-column mj-column1-54454443">
+        <mj-image href="https://mjml.io" src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544153577/Email/Images/AnnouncementOffset/Image_1.png" alt="" width="147px" padding="0px" css-class="mjmlblock mj-image mj-image1-25542555"/>
+      </mj-column>
+      <mj-column width="75%" css-class="mjmlblock mj-column mj-column1-37253521">
+        <mj-text font-size="19px" padding="0 25px" font-weight="bold" css-class="mjmlblock mj-text mj-text1-45125117">Special pre sale information</mj-text>
+        <mj-text font-size="11px" css-class="mjmlblock mj-text mj-text1-42244144">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rutrum enim eget magna efficitur, eu semper augue semper. Aliquam erat volutpat. Proin rutrum enim eget magna efficitur.</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#fcc245" css-class="mjmlblock mj-section mj-section1-54444444">
+      <mj-column css-class="mjmlblock mj-column mj-column1-25531555">
+        <mj-text align="center" font-size="20px" padding="0 25px" css-class="mjmlblock mj-text mj-text1-23527224"><span style="color: rgb(89, 89, 89);" css-class="mjmlblock span span1-45421252">PRE SALE BEGINS TODAY</span> AT 9 AM</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" background-url="https://www.arturia.com/images/newsletters/2016-02-ispark/05.jpg" background-size="cover" padding-bottom="20px" padding-top="20px" css-class="mjmlblock mj-section mj-section1-51425541">
+      <mj-column css-class="mjmlblock mj-column mj-column1-35424155">
+        <mj-button mj-class="button" href="https://mjml.io" padding="305px 25px 0" css-class="mjmlblock mj-button mj-button1-54445545">BUY TICKETS</mj-button>
+        <mj-text align="center" font-size="13px" padding-left="25px" padding-right="25px" padding-bottom="10px" padding-top="10px" css-class="mjmlblock mj-text mj-text1-25545242"><span style="color: rgb(255, 255, 255);" css-class="mjmlblock span span1-44414142">PASSWORD : YULAN03</span></mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-bottom="20px" padding-top="20px" css-class="mjmlblock mj-section mj-section1-22732415">
+      <mj-column width="25%" vertical-align="middle" css-class="mjmlblock mj-column mj-column1-55115751">
+        <mj-image src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544153578/Email/Images/AnnouncementOffset/Image_2.png" alt="CD" width="147px" padding="0px" css-class="mjmlblock mj-image mj-image1-22524544"/>
+      </mj-column>
+      <mj-column width="25%" vertical-align="middle" css-class="mjmlblock mj-column mj-column1-22542514">
+        <mj-text align="center" font-size="16px" padding="0 25px" css-class="mjmlblock mj-text mj-text1-31355524">LAST ALBUM AVAILABLE <span style="font-weight: bold;" css-class="mjmlblock span span1-42712255">12,99€</span></mj-text>
+        <mj-button mj-class="button" font-size="17px" href="https://mjml.io" padding="10px 0" css-class="mjmlblock mj-button mj-button1-11514554">BUY IT !</mj-button>
+      </mj-column>
+      <mj-column width="50%" css-class="mjmlblock mj-column mj-column1-45444525">
+        <mj-image href="https://mjml.io" src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544153577/Email/Images/AnnouncementOffset/Image_1.png" alt="Play now and win your vip pass" width="290px" padding="0px" css-class="mjmlblock mj-image mj-image1-45727535"/>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-bottom="20px" padding-top="20px" css-class="mjmlblock mj-section mj-section1-11135314">
+      <mj-column css-class="mjmlblock mj-column mj-column1-21444114">
+        <mj-button background-color="#000000" color="#fcc245" font-size="16px" border-radius="0px" href="https://mjml.io" padding="10px 25px" css-class="mjmlblock mj-button mj-button1-44452455">OUR PARTNERS</mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-bottom="20px" padding-top="0" css-class="mjmlblock mj-section mj-section1-45453145">
+      <mj-column width="25%" css-class="mjmlblock mj-column mj-column1-52555125">
+        <mj-image href="https://mjml.io" src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544153578/Email/Images/AnnouncementOffset/Image_2.png" alt="Partner logo" width="95px" padding="0 0 10px 0" css-class="mjmlblock mj-image mj-image1-54417247"/>
+      </mj-column>
+      <mj-column width="25%" css-class="mjmlblock mj-column mj-column1-41144317">
+        <mj-image href="https://mjml.io" src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544153578/Email/Images/AnnouncementOffset/Image_2.png" alt="Partner logo" width="95px" padding="0 0 10px 0" css-class="mjmlblock mj-image mj-image1-55154321"/>
+      </mj-column>
+      <mj-column width="25%" css-class="mjmlblock mj-column mj-column1-25475251">
+        <mj-image href="https://mjml.io" src="https://email.diybuilder.in/libs/builder/icons/image.svg" alt="Partner logo" width="95px" padding="0 0 10px 0" css-class="mjmlblock mj-image mj-image1-13345254"/>
+      </mj-column>
+      <mj-column width="25%" css-class="mjmlblock mj-column mj-column1-54574453">
+        <mj-image href="https://mjml.io" src="https://res.cloudinary.com/dheck1ubc/image/upload/v1544153578/Email/Images/AnnouncementOffset/Image_2.png" alt="Partner logo" width="95px" padding="0 0 10px 0" css-class="mjmlblock mj-image mj-image1-75111515"/>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-bottom="20px" padding-top="20px" css-class="mjmlblock mj-section mj-section1-25554455">
+      <mj-column css-class="mjmlblock mj-column mj-column1-45427154">
+        <mj-text align="center" font-size="13px" padding="0 25px" font-weight="bold" css-class="mjmlblock mj-text mj-text1-24455241">Terms and conditions:</mj-text>
+        <mj-text align="center" font-size="13px" padding="0 25px 10px 25px" css-class="mjmlblock mj-text mj-text1-14775714">
+          <p css-class="mjmlblock p p1-15133444">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rutrum enim eget magna efficitur, eu semper augue semper. Aliquam erat volutpat. Cras id dui lectus. Vestibulum sed finibus lectus, sit amet suscipit nibh. Proin nec commodo purus.
+            Sed eget nulla elit. Nulla aliquet mollis faucibus.</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#fcc245" padding-bottom="0px" padding-top="0" css-class="mjmlblock mj-section mj-section1-57354552">
+      <mj-column vertical-align="middle" css-class="mjmlblock mj-column mj-column1-27443222">
+        <mj-text align="center" font-size="20px" font-weight="bold" padding="0 25px" css-class="mjmlblock mj-text mj-text1-34454545">
+          <p css-class="mjmlblock p p1-54411154">0800 123 456</p>
+        </mj-text>
+        <mj-text align="center" color="#FFFFFF" font-size="13px" padding="0 25px" css-class="mjmlblock mj-text mj-text1-42447545">
+          <p css-class="mjmlblock p p1-12453522">Privacy policy</p>
+        </mj-text>
+      </mj-column>a
+      <mj-column vertical-align="middle" css-class="mjmlblock mj-column mj-column1-34752213">
+        <mj-image href="https://mjml.io" src="https://www.arturia.com/images/newsletters/2016-02-ispark/05.jpg" alt="Logo yellow" width="133px" padding="0px" css-class="mjmlblock mj-image mj-image1-54451415"/>
+      </mj-column>
+      <mj-column vertical-align="middle" css-class="mjmlblock mj-column mj-column1-31245215">
+        <mj-social mode="horizontal" padding="30px" css-class="mjmlblock mj-social mj-social1-55447354">
+          <mj-social-element name="facebook" href="[[SHORT_PERMALINK]]" css-class="mjmlblock mj-social-element mj-social-element1-43445715"/>
+          <mj-social-element name="twitter" href="[[SHORT_PERMALINK]]" css-class="mjmlblock mj-social-element mj-social-element1-45442442"/>
+          <mj-social-element name="google" href="[[SHORT_PERMALINK]]" css-class="mjmlblock mj-social-element mj-social-element1-44452443"/>
+        </mj-social>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-bottom="20px" padding-top="20px" css-class="mjmlblock mj-section mj-section1-11157453">
+      <mj-column css-class="mjmlblock mj-column mj-column1-45253544">
+        <mj-text align="center" font-size="11px" padding="0 25px" css-class="mjmlblock mj-text mj-text1-44252347">
+          <p css-class="mjmlblock p p1-42442445">[[DELIVERY_INFO]]</p>
+          <p css-class="mjmlblock p p1-57545445">[[POSTAL_ADDRESS]]</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

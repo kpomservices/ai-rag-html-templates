@@ -1,0 +1,31 @@
+<mjml css-class="mjmlblock mjml mjml1-44456115">
+  <mj-head css-class="mjmlblock mj-head mj-head1-54545455">
+    <mj-attributes css-class="mjmlblock mj-attributes mj-attributes1-45331465">
+      <mj-all padding="0px" css-class="mjmlblock mj-all mj-all1-48535657"/>
+      <mj-text font-family="Ubuntu, Helvetica, Arial, sans-serif" padding="0 25px" font-size="13px" css-class="mjmlblock mj-text mj-text1-65486484"/>
+      <mj-section background-color="#ffffff" css-class="mjmlblock mj-section mj-section1-47884567"/>
+      <mj-class name="preheader" color="#000000" font-size="11px" css-class="mjmlblock mj-class mj-class1-64453664"/>
+    </mj-attributes>
+    <mj-style inline="inline" css-class="mjmlblock mj-style mj-style1-54465185">a { text-decoration: none!important; color: inherit!important; }</mj-style>
+  </mj-head>
+  <mj-body background-color="#bedae6" css-class="mjmlblock mj-body mj-body1-14855665">
+    <mj-section css-class="mjmlblock mj-section mj-section1-58155761">
+      <mj-column width="100%" css-class="mjmlblock mj-column mj-column1-45514487">
+        <mj-image src="https://www.arturia.com/images/newsletters/2016-02-ispark/05.jpg" alt="header image" padding="0px" css-class="mjmlblock mj-image mj-image1-35647566"/>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-bottom="20px" padding-top="10px" css-class="mjmlblock mj-section mj-section1-41877345">
+      <mj-column css-class="mjmlblock mj-column mj-column1-55484354">
+        <mj-text align="center" padding="10px 25px" font-size="20px" color="#512d0b" css-class="mjmlblock mj-text mj-text1-64654651"><strong css-class="mjmlblock strong strong1-45548415">Hey {{FirstName}}!</strong></mj-text>
+        <mj-text align="center" font-size="18px" font-family="Arial" css-class="mjmlblock mj-text mj-text1-67184554">Are you enjoying our weekly newsletter?<br css-class="mjmlblock br br1-53184617"/> Then why not share it with your friends?</mj-text>
+        <mj-text align="center" color="#489BDA" font-size="25px" font-family="Arial, sans-serif" font-weight="bold" line-height="35px" padding-top="20px" css-class="mjmlblock mj-text mj-text1-74844686">You'll get a 15% discount <br css-class="mjmlblock br br1-43634875"/>
+          <span style="font-size:18px" css-class="mjmlblock span span1-45551484">on your next order when a friend uses the code {{ReferalCode}}!</span>
+        </mj-text>
+        <mj-button background-color="#8bb420" color="#FFFFFF" href="https://mjml.io" font-family="Arial, sans-serif" padding="20px 0 0 0" font-weight="bold" font-size="16px" css-class="mjmlblock mj-button mj-button1-43555474">Refer a friend now</mj-button>
+        <mj-text align="center" color="#000000" font-size="14px" font-family="Arial, sans-serif" padding-top="40px" css-class="mjmlblock mj-text mj-text1-76365755">Best, <br css-class="mjmlblock br br1-45564753"/> The {{CompanyName}} Team
+          <p css-class="mjmlblock p p1-56664545"/>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

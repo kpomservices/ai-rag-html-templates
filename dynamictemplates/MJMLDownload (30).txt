@@ -1,0 +1,60 @@
+<mjml css-class="mjmlblock mjml mjml1-65145552">
+  <mj-body css-class="mjmlblock mj-body mj-body1-43416346">
+    <mj-section css-class="mjmlblock mj-section mj-section1-44561554">
+      <mj-column css-class="mjmlblock mj-column mj-column1-66015654">
+        <mj-image src="https://picsum.photos/800/400" alt="Company Logo" css-class="mjmlblock mj-image mj-image1-53614554"/>
+        <mj-divider border-color="#007bff" css-class="mjmlblock mj-divider mj-divider1-64544563"/>
+        <mj-text align="center" font-size="20px" font-family="Helvetica, Arial, sans-serif" color="#333333" css-class="mjmlblock mj-text mj-text1-04064345">
+          Black Friday Sale is Here!
+        </mj-text>
+        <mj-text align="center" font-size="16px" font-family="Helvetica, Arial, sans-serif" color="#666666" css-class="mjmlblock mj-text mj-text1-44565535">
+          Grab your favorite products at amazing discounts!
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section css-class="mjmlblock mj-section mj-section1-54455400">
+      <mj-column css-class="mjmlblock mj-column mj-column1-55156145">
+        <mj-image src="https://picsum.photos/800/400" alt="Hero Image" css-class="mjmlblock mj-image mj-image1-44660544"/>
+      </mj-column>
+    </mj-section>
+
+    <mj-section css-class="mjmlblock mj-section mj-section1-45434414">
+      <mj-column width="33.33%" css-class="mjmlblock mj-column mj-column1-46333455">
+        <mj-image src="https://picsum.photos/400/300" alt="Product 1" css-class="mjmlblock mj-image mj-image1-51165015"/>
+        <mj-text font-size="16px" font-family="Helvetica, Arial, sans-serif" color="#333333" css-class="mjmlblock mj-text mj-text1-54464501">Product 1</mj-text>
+        <mj-text font-size="14px" font-family="Helvetica, Arial, sans-serif" color="#666666" css-class="mjmlblock mj-text mj-text1-56044654">$29.99</mj-text>
+        <mj-button background-color="#007bff" color="#ffffff" href="#" font-family="Helvetica, Arial, sans-serif" css-class="mjmlblock mj-button mj-button1-46041555">Shop Now</mj-button>
+      </mj-column>
+      <mj-column width="33.33%" css-class="mjmlblock mj-column mj-column1-64641414">
+        <mj-image src="https://picsum.photos/400/300" alt="Product 2" css-class="mjmlblock mj-image mj-image1-46146463"/>
+        <mj-text font-size="16px" font-family="Helvetica, Arial, sans-serif" color="#333333" css-class="mjmlblock mj-text mj-text1-54044540">Product 2</mj-text>
+        <mj-text font-size="14px" font-family="Helvetica, Arial, sans-serif" color="#666666" css-class="mjmlblock mj-text mj-text1-06560404">$49.99</mj-text>
+        <mj-button background-color="#007bff" color="#ffffff" href="#" font-family="Helvetica, Arial, sans-serif" css-class="mjmlblock mj-button mj-button1-73144544">Shop Now</mj-button>
+      </mj-column>
+      <mj-column width="33.33%" css-class="mjmlblock mj-column mj-column1-54454575">
+        <mj-image src="https://picsum.photos/400/300" alt="Product 3" css-class="mjmlblock mj-image mj-image1-14554646"/>
+        <mj-text font-size="16px" font-family="Helvetica, Arial, sans-serif" color="#333333" css-class="mjmlblock mj-text mj-text1-43635576">Product 3</mj-text>
+        <mj-text font-size="14px" font-family="Helvetica, Arial, sans-serif" color="#666666" css-class="mjmlblock mj-text mj-text1-65037746">$19.99</mj-text>
+        <mj-button background-color="#007bff" color="#ffffff" href="#" font-family="Helvetica, Arial, sans-serif" css-class="mjmlblock mj-button mj-button1-66555465">Shop Now</mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-section css-class="mjmlblock mj-section mj-section1-64044464">
+      <mj-column css-class="mjmlblock mj-column mj-column1-44405433">
+        <mj-divider border-color="#007bff" css-class="mjmlblock mj-divider mj-divider1-45166415"/>
+        <mj-text align="center" font-size="16px" font-family="Helvetica, Arial, sans-serif" color="#333333" css-class="mjmlblock mj-text mj-text1-07455445">
+          Hurry! Limited time offer!
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section css-class="mjmlblock mj-section mj-section1-43531563">
+      <mj-column css-class="mjmlblock mj-column mj-column1-76604765">
+        <mj-text align="center" font-size="14px" font-family="Helvetica, Arial, sans-serif" color="#666666" css-class="mjmlblock mj-text mj-text1-35467644">
+          If you no longer wish to receive these emails, you can unsubscribe <a href="#" css-class="mjmlblock a a1-06454170">here</a>.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

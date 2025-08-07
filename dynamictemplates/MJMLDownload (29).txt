@@ -1,0 +1,64 @@
+<mjml css-class="mjmlblock mjml mjml1-45448754">
+  <mj-body css-class="mjmlblock mj-body mj-body1-74844445">
+    <!-- Company Header -->
+    <mj-section padding-bottom="0px" background-color="#C488C6" border-radius="10px 10px 0px 0px" css-class="mjmlblock mj-section mj-section1-57548755">
+      <mj-column css-class="mjmlblock mj-column mj-column1-44488544">
+        <mj-image width="150px" padding-bottom="30px" src="https://i.imgur.com/Noig4WH.png" css-class="mjmlblock mj-image mj-image1-58844587"/>
+        <mj-divider border-width="0.75px" border-color="#915480" css-class="mjmlblock mj-divider mj-divider1-57445855"/>
+      </mj-column>
+    </mj-section>
+    <!-- Slogan -->
+    <mj-section padding-bottom="0px" background-color="#C488C6" css-class="mjmlblock mj-section mj-section1-85455555">
+      <mj-column css-class="mjmlblock mj-column mj-column1-41845417">
+        <mj-text align="center" color="#fefffe" font-size="18px" font-family="Helvetica Neue" css-class="mjmlblock mj-text mj-text1-45445745">Introducing</mj-text>
+        <mj-text align="center" color="#78E4FC" font-size="32px" font-family="Helvetica Neue" padding-bottom="30px" css-class="mjmlblock mj-text mj-text1-48177785">The Aqua Cheese Board</mj-text>
+        <mj-divider border-width="0.75px" border-color="#915480" css-class="mjmlblock mj-divider mj-divider1-78588457"/>
+      </mj-column>
+    </mj-section>
+    <!-- Body Text -->
+    <mj-section padding-top="10px" padding-bottom="10px" background-color="#C488C6" css-class="mjmlblock mj-section mj-section1-55155414">
+      <mj-column width="450px" css-class="mjmlblock mj-column mj-column1-84847555">
+        <mj-text align="center" color="#fefffe" font-size="18px" line-height="1.5" font-family="Helvetica Neue" css-class="mjmlblock mj-text mj-text1-88755458">A colorful new addition to the CCB collection.</mj-text>
+      </mj-column>
+    </mj-section>
+    <!-- Body Image -->
+    <mj-section padding-top="0px" background-color="#C488C6" css-class="mjmlblock mj-section mj-section1-45447777">
+      <mj-column css-class="mjmlblock mj-column mj-column1-45574415">
+        <mj-image width="275px" border-radius="7px 7px 7px 7px" src="https://s7d1.scene7.com/is/image/terrain/66713280_040_a?$zoom2$" css-class="mjmlblock mj-image mj-image1-44575555"/>
+        <mj-button border-radius="7px 7px 7px 7px" height="50" width="170px" padding-top="30px" padding-bottom="30px" color="7533E0" font-size="16px" background-color="#F6B4B4" href="#" css-class="mjmlblock mj-button mj-button1-54448484">Buy Now!</mj-button>
+        <mj-divider border-width="0.75px" border-color="#915480" padding-bottom="0px" css-class="mjmlblock mj-divider mj-divider1-48555551"/>
+      </mj-column>
+    </mj-section>
+    <!-- Footer Socials -->
+    <mj-section align="center" padding-top="0px" border-radius="0px 0px 10px 10px" background-color="#C488C6" css-class="mjmlblock mj-section mj-section1-74148488">
+      <mj-column css-class="mjmlblock mj-column mj-column1-74855487"/>
+      <mj-column css-class="mjmlblock mj-column mj-column1-45458118">
+        <mj-table align="center" css-class="mjmlblock mj-table mj-table1-58555554">
+          <tr css-class="mjmlblock tr tr1-75441145">
+            <td align="center" style="padding: 7px" css-class="mjmlblock td td1-48848857">
+              <a href="#" css-class="mjmlblock a a1-84745844">
+                <img href="#" src="https://uploads-ssl.webflow.com/63a478b78ec7275316525948/648a3e29a5c6b5c9b398ab1b_twitter.png" width="20" height="20" css-class="mjmlblock img img1-87444718"/>
+              </a>
+            </td>
+            <td align="center" style="padding: 7px" css-class="mjmlblock td td1-58558448">
+              <a href="#" css-class="mjmlblock a a1-15747741">
+                <img href="#" src="https://uploads-ssl.webflow.com/63a478b78ec7275316525948/648a3e1da5c6b5c9b3989d82_linkedin.png" width="18" height="20" css-class="mjmlblock img img1-54448744"/>
+              </a>
+            </td>
+            <td align="center" style="padding: 7px" css-class="mjmlblock td td1-47445571">
+              <a href="#" css-class="mjmlblock a a1-78444544">
+                <img href="#" src="https://uploads-ssl.webflow.com/63a478b78ec7275316525948/648a3e2938775d5c03b44c6b_youtube.png" width="21" height="20" css-class="mjmlblock img img1-45754781"/>
+              </a>
+            </td>
+            <td align="center" style="padding: 7px" css-class="mjmlblock td td1-84885747">
+              <a href="#" css-class="mjmlblock a a1-47755154">
+                <img src="https://uploads-ssl.webflow.com/63a478b78ec7275316525948/648a3e29ba92fc87d1be7b66_slack.png" width="19" height="19" css-class="mjmlblock img img1-17171554"/>
+              </a>
+            </td>
+          </tr>
+        </mj-table>
+      </mj-column>
+      <mj-column css-class="mjmlblock mj-column mj-column1-47555415"/>
+    </mj-section>
+  </mj-body>
+</mjml>
