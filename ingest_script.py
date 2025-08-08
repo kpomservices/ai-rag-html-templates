@@ -1,5 +1,6 @@
 import os
 import glob
+import shutil
 from pathlib import Path
 from bs4 import BeautifulSoup
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -153,11 +154,10 @@ Content Length: {len(content)} characters
             'title': title_text,
             'description': description,
             'type': 'html_template'
-        }
-    
+        }   
 
     
-    def ingest_templates(self, templates_dir="./templates"):
+    def ingest_templates(self, templates_dir="./dynamictemplates"):
         """Ingest all HTML templates from directory"""
         documents = []
         
@@ -203,6 +203,11 @@ Content Length: {len(content)} characters
         
         print(f"Creating vector store with {len(documents)} document chunks...")
         
+        # Add this to your ingest script before creating new vectorstore
+        if os.path.exists(self.persist_directory):
+            shutil.rmtree(self.persist_directory)
+            print("✅ Cleared old vector store")
+    
         # Create vector store
         vectorstore = Chroma.from_documents(
             documents=documents,

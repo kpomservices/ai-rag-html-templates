@@ -6,7 +6,7 @@ import asyncio
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+# from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import Chroma
 from langchain_community.llms import HuggingFacePipeline
 from transformers import pipeline, AutoTokenizer
@@ -63,8 +63,8 @@ class HTMLRAGSystem:
             self.llm = Ollama(
                 model="tinyllama",  # Fast and reliable model
                 temperature=0.1,
-                num_ctx=4096,      # Increased context window
-                num_predict=2048,  # Increased max tokens to generate for longer responses
+                num_ctx=8192,      # Increased context window
+                num_predict=4096,  # Increased max tokens to generate for longer responses
                 stop=["</s>", "Human:", "Assistant:"]  # Stop tokens to prevent incomplete responses
             )
             print("✅ Using Ollama with tinyllama model")
